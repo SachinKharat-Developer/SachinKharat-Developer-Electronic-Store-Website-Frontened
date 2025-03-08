@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html">E-Shop</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="products.html">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="cart.html">Cart</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <!-- Product Image -->
+        <img id="product-image" src="" class="img-fluid" alt="Product Image">
+      </div>
+      <div class="col-md-6">
+        <h2 id="product-name" class="fw-bold mb-3 text-dark">Product Name</h2>
+        <p id="product-price" class="fs-4 fw-bold text-primary">₹0.00</p>
+        <p id="product-description" class="text-secondary">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sit amet nunc eu mauris egestas consequat.
+        </p>
+        <p id="product-rating" class="mb-3">
+          <span class="text-warning fw-bold">4.5 Stars</span>
+          <span class="text-muted">(200 reviews)</span>
+        </p>
+
+        <!-- Add to Cart Button -->
+        <button id="add-to-cart" class="btn btn-success">Add to Cart</button>
+      </div>
+    </div>
+    
+    <h3>Related Products</h3>
+    <div class="row" id="related-products">
+      <!-- Related Products will go here -->
+    </div>
+  </div>
+
+  <script>
+    // Static product data
+    const products = [
+      {
+        id: 1,
+        name: "Smartphone",
+        price: "₹60000",
+        description: "iPhone 16e 128 GB: Built for Apple Intelligence, A18 Chip, Supersized Battery Life, 48MP Fusion. Camera, 15.40 cm (6.1″) Super Retina XDR Display; Black",
+        rating: "4.5 Stars (1124 reviews)",
+        image: "images/smart-phones.png",
+        related: [2, 3, 4]
+      },
+      {
+        id: 2,
+        name: "Headphones",
+        price: "₹1499",
+        description: "boAt Rockerz 450, 15 HRS Battery, 40mm Drivers, Padded Ear Cushions, Integrated Controls, Dual Modes, Bluetooth Headphones, Wireless Headphone with Mic (Hazel Beige)",
+        rating: "4.3 Stars (1000 reviews)",
+        image: "images/Boatz-Headphone.png",
+        related: [1, 3, 4]
+      },
+      {
+        id: 3,
+        name: "Refrigerator",
+        price: "₹20000",
+        description: "Whirlpool 235 L 2 Star Frost Free Double Door Refrigerator (NEO DF278 PRM RADIANT STEEL(2S)-TL, 2024 Fridge Model)",
+        rating: "4.2 Stars (2772 reviews)",
+        image: "images/Fridge.png",
+        related: [1, 2, 4]
+      },
+      {
+        id: 4,
+        name: "Camera",
+        price: "₹9084",
+        description: "Saneen Digital Camera for Photography, 4K 64MP WiFi Touch Screen Vlogging Camera with Flash, 32GB Micro Card, Lens Hood, 3000mAH Battery, Front and Rear Cameras, 4″Big Screen, Hot Shoe Interface-Black",
+        rating: "4.7 Stars (469 reviews)",
+        image: "images/camera.png",
+        related: [1, 2, 3]
+      },
+      {
+        id: 5,
+        name: "Laptop",
+        price: "₹40990",
+        description: "ASUS Vivobook Go 15 (2023), AMD Ryzen 5 7520U, 15.6'' (39.62 cm) FHD, Thin & Light Laptop (16GB/512GB SSD/Windows 11/Office 2021/Alexa Built-in/Mixed Black/1.63 kg), E1504FA-NJ542WS ",
+        rating: "4.6 Stars (230 reviews)",
+        image: "images/laptop.png",
+        related: [6, 7, 8]
+      },
+      {
+        id: 6,
+        name: "Tablet",
+        price: "₹14999",
+        description: "Lenovo Tab Plus with Octa JBL Hi-Fi Speakers| 8 GB RAM, 128 GB ROM| 11.5 Inch, 2K, 90 Hz Refresh| Wi-Fi Tablet| Android 14| 45 W Fast Charger| Built-in Kickstand| Color: Luna Grey",
+        rating: "4.3 Stars (152 reviews)",
+        image: "images/tablet.png",
+        related: [5, 7, 8]
+      },
+      {
+        id: 7,
+        name: "Bluetooth Speaker",
+        price: "₹779",
+        description: "ZEBRONICS Astra 35, Portable Bluetooth Speaker, 16 Watts, Upto 24h Backup, Dual Drivers + Dual Passive Radiators, Call Function, Bluetooth v5.3 | USB | mSD| AUX, TWS, RGB LED",
+        rating: "4.1 Stars (320 reviews)",
+        image: "images/bluetooth-speaker.png",
+        related: [5, 6, 8]
+      },
+      {
+        id: 8,
+        name: "Smart TV",
+        price: "₹12990",
+        description: "Samsung 80 cm (32 inches) HD Ready Smart LED TV UA32T4380AKXXL (Glossy Black)",
+        rating: "4.8 Stars (400 reviews)",
+        image: "images/smart-tv.png",
+        related: [5, 6, 7]
+      },
+      {
+        id: 9,
+        name: "Smart Watch ",
+        price: "₹999",
+        description: "Noise Pulse Go Buzz Smart Watch with Advanced Bluetooth Calling, 1.69'' TFT Display, SpO2, 100 Sports Mode with Auto Detection, Upto 7 Days Battery (2 Days with Heavy Calling) - Jet Black.",
+        rating: "4.1 Stars (450 reviews)",
+        image: "images/smart-watch.png",
+        related: [1, 3, 5]
+      },
+      {
+        id: 10,
+        name: "Gaming Mouse",
+        price: "₹349",
+        description: "EvoFox Starter Series Spectre USB Wired Gaming Mouse with Upto 3600 DPI Gaming Sensor | 6 Buttons Design | Upto 7 Million Clicks | 7 Colours Rainbow Lighting with Breathing Effect | 1.5m Braided Cable (White).",
+        rating: "4.0 Stars (80 reviews)",
+        image: "images/Gaming Mouse.png",
+        related: [11, 12, 13]
+      },
+      {
+        id: 11,
+        name: "Keyboard",
+        price: "₹569",
+        description: "Portronics Key7 Combo Wireless Keyboard & Mouse Set with Copilot AI, 2.4 GHz USB Receiver, 10m Range, 12 Shortcut Keys, Adjustable DPI (Up to 1600), 10M Key Life for PC, Laptop, Mac(Grey+Orange)",
+        rating: "4.3 Stars (220 reviews)",
+        image: "images/keyword.png",
+        related: [10, 12, 14]
+      },
+      {
+        id: 12,
+        name: "External Hard Drive",
+        price: "₹5089",
+        description: "Seagate Expansion 2TB External HDD - USB 3.0 for Windows and Mac with 3 yr Data Recovery Services, Portable Hard Drive (STKM2000400)",
+        rating: "4.5 Stars (190 reviews)",
+        image: "images/HHD.png",
+        related: [10, 11, 13]
+      },
+      {
+        id: 13,
+        name: "Portable Charger",
+        price: "₹1229",
+        description: "Ambrane Magsafe Wireless 10000Mah Fast Charging USB Type-C Input Power Bank, Strong Magnet, 22.5W Output For iPhone 12 & Above, Android & Other Qi Enabled Devices + Magnetic Ring (Aerosync Snap, Blue)",
+        rating: "4.0 Stars (50 reviews)",
+        image: "images/Power-Bank.png",
+        related: [10, 11, 12]
+      },
+      {
+        id: 14,
+        name: "Wireless Earbuds",
+        price: "₹1259",
+        description: "OnePlus Nord Buds 2r True Wireless in Ear Earbuds with Mic, 12.4mm Drivers, Playback:Upto 38hr case,4-Mic Design, IP55 Rating [Deep Grey]",
+        rating: "4.3 Stars (300 reviews)",
+        image: "images/Earbuds.png",
+        related: [11, 12, 13]
+      },
+      {
+        id: 15,
+        name: "CCTV Camera",
+        price: "₹1499",
+        description: "Qubo Smart 360 2K 3MP 1296p WiFi CCTV Security Camera from Hero Group | Mobile App | Two Way Talk | Night Vision | Cloud & SD Card Recording | Made in India | Alexa & OK Google | (3MP)",
+        rating: "4.6 Stars (250 reviews)",
+        image: "images/CCTV.png",
+        related: [5, 6, 7]
+      },
+      {
+        id: 16,
+        name: "Washing Machine ",
+        price: "₹15499",
+        description: "Whirlpool 7 kg Magic Clean 5 Star Fully Automatic Top Load Washing Machine Grey (MAGIC CLEAN 7.0 GENX GREY 5YMW)",
+        rating: "4.6 Stars (252 reviews)",
+        image: "images/washing-machine.png",
+        related: [5 ,7]
+      },
+      {
+        id: 17,
+        name: "Air Fryer",
+        price: "₹2199",
+        description: "Pigeon Healthifry Digital Air Fryer, 360° High Speed Air Circulation Technology 1200 W with Non-Stick 4.2 L Basket - Green",
+        rating: "3.6 Stars (250 reviews)",
+        image: "images/Air-fryer.png",
+        related: [2,5,8]
+      }
+    ];
+
+    // Function to get product details by ID
+    function getProductById(id) {
+      return products.find(product => product.id === id);
+    }
+
+    // Get the product ID from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = parseInt(urlParams.get('id'));  // Ensure the productId is an integer
+
+    // Fetch the product details
+    const product = getProductById(productId);
+
+    // If product is found, display the details
+    if (product) {
+      document.getElementById('product-name').textContent = product.name;
+      document.getElementById('product-price').textContent = product.price;
+      document.getElementById('product-description').textContent = product.description;
+      document.getElementById('product-rating').textContent = product.rating;
+      document.getElementById('product-image').src = product.image;
+
+      // Related Products Section
+      const relatedProductsDiv = document.getElementById('related-products');
+      relatedProductsDiv.innerHTML = ''; // Clear existing content
+      product.related.forEach(relatedId => {
+        const relatedProduct = getProductById(relatedId);
+        if (relatedProduct) {
+          const relatedCard = document.createElement('div');
+          relatedCard.classList.add('col-md-3');
+          relatedCard.innerHTML = `
+            <div class="card">
+              <img src="${relatedProduct.image}" class="card-img-top" alt="${relatedProduct.name}">
+              <div class="card-body text-center">
+                <h5 class="card-title">${relatedProduct.name}</h5>
+                <p class="card-text">${relatedProduct.price}</p>
+                <a href="product-view.html?id=${relatedProduct.id}" class="btn btn-primary">View Details</a>
+              </div>
+            </div>
+          `;
+          relatedProductsDiv.appendChild(relatedCard);
+        }
+      });
+    } else {
+      // If the product is not found
+      document.getElementById('product-name').textContent = "Product not found";
+      document.getElementById('product-price').textContent = "₹0.00";
+      document.getElementById('product-description').textContent = "Sorry, this product is no longer available.";
+      document.getElementById('product-rating').textContent = "";
+      document.getElementById('product-image').src = "";  // Optionally hide the image
+    }
+
+   // Add to Cart Button functionality
+  document.getElementById('add-to-cart').addEventListener('click', () => {
+    // Check if product is valid before adding to cart
+    if (product) {
+      const productToAdd = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        quantity: 1  // Assuming the default quantity is 1
+      };
+
+      // Get the cart from localStorage (or use an empty array if not found)
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // Check if the product is already in the cart
+      const existingItem = cart.find(item => item.id === productToAdd.id);
+
+      if (existingItem) {
+        // If the product is already in the cart, increase its quantity
+        existingItem.quantity += 1;
+      } else {
+        // Otherwise, add the new product to the cart
+        cart.push(productToAdd);
+      }
+
+      // Save the updated cart to localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      // Alert the user that the product has been added to the cart
+      alert(`${product.name} has been added to your cart!`);
+    } else {
+      alert("Sorry, this product is unavailable.");
+    }
+  });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
